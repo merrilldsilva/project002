@@ -1,28 +1,8 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import BlogList from "./blogList";
+import useFetch from "./useFetch";
 const Home = () => {
-    const [blogs, setBlogs] = useState(null);
-    const[isloading, setisloading]= useState(true);
-    const[err,seterr]=useState(null);
-   useEffect(()=>{
-
-        fetch('http://localhost:8000/blogs')
-        
-        .then(res =>{
-            return res.json();
-        })
-        .then(data=>{
-            setBlogs(data);
-            setisloading(false);
-        })
-        .catch(err=>{
-            seterr('could not connect');
-            setisloading(false);
-
-        });
-  
-
-    }, []);
+    const { Data:blogs, isloading, err} = useFetch("http://localhost:4000/blogs");
     
     return (
             <div className="home">
